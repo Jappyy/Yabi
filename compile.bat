@@ -15,5 +15,5 @@ gcc ^
 %~dp0src\debug.c ^
 %~dp0src\tokens.c ^
 -o %~dp0bin\yabi.exe ^
--lregex -march=native -O3 -std=c11 -Wall -Wextra
+-lregex -march=native -O3 -std=c11 
 

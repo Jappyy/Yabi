@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O3 -march=native -std=c11 -Wall -Wextra -Wpedantic -Wconversion -lncurses
+CFLAGS = -O3 -march=native -std=c11 -lncurses
 BDIR = $(shell pwd)/bin
 SDIR = $(shell pwd)/src
 ODIR = $(shell pwd)/obj
