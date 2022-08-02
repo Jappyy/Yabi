@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": ["99_bottles", "-d"],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "c:/Users/jappy/OneDrive/Desktop/bf2",
+      "program": "c:/Users/jappy/OneDrive/Desktop/bf2/bin/yabi.exe",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
