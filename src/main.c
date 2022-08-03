@@ -12,10 +12,6 @@ int main(int argc, char** argv)
    command_line_args* args = check_args(argc, argv);
    check_flags(args);
 
-   
-   
-
-   //printf("input: %s, output: %s\n\n", args->input_filename, args->output_filename);
 
    FILE *source = NULL;
    FILE *output = NULL;
@@ -48,16 +44,5 @@ int main(int argc, char** argv)
       
       else
          print(stdout, "[INFO] program execution took %lf seconds", (double) (clock() - time)/CLOCKS_PER_SEC);
-
-/*
-   if (args->flags.compiler)    printf("compiler mode\n"   );
-   if (args->flags.about)       printf("about\n"           );
-   if (args->flags.about_file)  printf("about(file)\n"     );
-   if (args->flags.benchmark)   printf("benchmark\n"       );
-   if (args->flags.debug)       printf("debug mode\n"      );
-   if (args->flags.help)        printf("help\n"            );
-   if (args->flags.interpreter) printf("interpreter mode\n");
-   if (args->flags.optimize)    printf("optimize\n"        );
-*/
 
 }
