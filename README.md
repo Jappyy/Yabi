@@ -16,7 +16,7 @@ Questo progetto didattico nasce con l'obiettivo di esplorare il funzionamento di
    * [help](#help)
    * [about](#about)
 
-*[risultati dei benchmark](#benchmark)
+* [risultati dei benchmark](#benchmark)
 ---
 
 ## Installazione:
