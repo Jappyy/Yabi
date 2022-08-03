@@ -13,6 +13,12 @@ void init()
 
 void restore_default()
 {
+   echo();
+   nocbreak();
+   keypad(stdscr, FALSE);
+   scrollok(stdscr, FALSE);
+   nodelay(stdscr, FALSE);
+
    getch();
    endwin();
 }
