@@ -42,8 +42,17 @@ void interpreter(command_line_args* args, char* buf, FILE* output)
          case ',':
             if (args->flags.debug)
                print(stdout, "insert input: ");
-            
-            *ptr = (unsigned char) getchar();
+
+            #ifdef __linux__
+               nodelay(stdscr, FALSE);
+               *ptr = (unsigned char) getch();
+               print(stdout, "%c", *ptr);
+               nodelay(stdscr, TRUE);
+
+            #elif defined _WIN32
+               *ptr = (unsigned char) getchar();
+            #endif
+
 
             if (args->flags.debug)
             {
