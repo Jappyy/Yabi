@@ -16,7 +16,7 @@ Questo progetto didattico nasce con l'obiettivo di esplorare il funzionamento di
    * [help](#help)
    * [about](#about)
 
-* [risultati dei benchmark](#benchmark)
+* [risultati dei benchmark](#results)
 ---
 
 ## Installazione:
@@ -260,7 +260,7 @@ Questa flag stampa a video una concisa presentazione di questo progetto.
 
 ---
 
-# <a id=benchmark> </a> Risultati dei benchmark:
+# <a id=results> </a> Risultati dei benchmark:
 ## interpreter mode:
 ```
 ./yabi mandelbrot -b
