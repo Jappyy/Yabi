@@ -4,7 +4,6 @@ gcc ^
 %~dp0src\args.c ^
 %~dp0src\error.c ^
 %~dp0src\info.c ^
-%~dp0src\benchmark.c ^
 %~dp0src\files.c ^
 %~dp0src\brackets.c ^
 %~dp0src\interpreter.c ^

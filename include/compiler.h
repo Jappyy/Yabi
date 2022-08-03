@@ -4,7 +4,6 @@
 #include "../include/error.h"
 #include "../include/args.h"
 #include "../include/brackets.h"
-#include "../include/benchmark.h"
 
 #include <stdarg.h>
 #include <regex.h>
@@ -59,11 +58,11 @@ Token* internal_parser(char* ptr,int len, char* buf, regex_t preg);
 
 void print_tokens(Token* program, int depth);
 
-void print_prologue(FILE* fp);
+void print_prologue(command_line_args* args, FILE* fp);
 
 
-void compiler_output_00(FILE* fp, char* buf);
-void compiler_output_01(FILE* fp, Token* program, int depth);
+void compiler_output_00(command_line_args* args, FILE* fp, char* buf);
+void compiler_output_01(command_line_args* args, FILE* fp, Token* program, int depth);
 
 void print_indent(FILE* fp, int depth);
 

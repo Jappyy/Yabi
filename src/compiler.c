@@ -6,12 +6,13 @@ void compile(command_line_args* args, char* buf, FILE* output)
    if (args->flags.optimize)
    {
       Token* program = parse(buf);
-      print_prologue(output);
-      compiler_output_01(output, program, 0);
+      print_prologue(args, output);
+      //print_tokens(program, 0); debug
+      compiler_output_01(args, output, program, 0);
    }
    
    else
-      compiler_output_00(output, buf);
+      compiler_output_00(args, output, buf);
 }
 
 
@@ -62,9 +63,9 @@ void print_tokens(Token* program, int depth)
 
 
 
-void compiler_output_00(FILE* fp, char* buf)
+void compiler_output_00(command_line_args* args, FILE* fp, char* buf)
 {
-   print_prologue(fp);
+   print_prologue(args, fp);
    
    char c;
    int indent = 0;
@@ -123,13 +124,14 @@ void compiler_output_00(FILE* fp, char* buf)
       }  
    }
    
+   
    print(fp, "}");
 }
 
 
 
 
-void compiler_output_01(FILE* fp, Token* program, int depth)
+void compiler_output_01(command_line_args* args, FILE* fp, Token* program, int depth)
 {
 
    while(program)
@@ -158,7 +160,7 @@ void compiler_output_01(FILE* fp, Token* program, int depth)
             print_indent(fp, depth);
             print(fp, "{\n");
 
-            compiler_output_01(fp, program->as.loop, depth+1);
+            compiler_output_01(args, fp, program->as.loop, depth+1);
             break;
 
          case _end_loop:
@@ -182,17 +184,56 @@ void print_indent(FILE* fp, int depth)
 
 
 
-void print_prologue(FILE* fp)
+void print_prologue(command_line_args* args, FILE* fp)
 {
-   print(fp, 
+   if (args->flags.benchmark)
+   {
+      print( fp,
 
-      "#include <stdio.h>\n\n"
+         "#include <stdio.h>\n"
+         "#include <stdlib.h>\n"
+         "#include <stdbool.h>\n"
+         "#include <time.h>\n\n"
+
+         "void benchmark()\n"
+         "{\n"
+         "   static clock_t tic;\n"
+         "   static clock_t toc;\n"
+         "   static bool timer_start = false;\n\n"
+
+         "   if(timer_start == false)\n"
+         "   {\n"
+         "      timer_start = true;\n"
+         "      tic = clock();\n"
+         "      return;\n"
+         "   }\n\n"
+
+         "   if (timer_start == true)\n"
+         "   {\n"
+         "      toc = clock();\n"
+         "      printf(\"[INFO: The program took %%lf seconds]\", (double)(toc - tic) / CLOCKS_PER_SEC);\n"
+         "      return;\n"
+         "   } \n"  
+         "}\n\n"
+
+         "int main()\n"
+         "{\n"
+         "   atexit(benchmark);\n"
+         "   benchmark();\n"
+         "   unsigned char cells[30000] = {0};\n"
+         "   unsigned char* ptr = &cells[15000];\n"
+         "   clock_t time = clock();\n\n"
+      );
+   }  
    
-      "int main()\n"
-      "{\n"
-      "   unsigned char cells[30000] = {0};\n"
-      "   unsigned char* ptr = &cells[15000];\n\n"
+   else
+      print(fp, 
 
-   );
+         "#include <stdio.h>\n\n"
 
+         "int main()\n"
+         "{\n"
+         "   unsigned char cells[30000] = {0};\n"
+         "   unsigned char* ptr = &cells[15000];\n\n"
+      );
 }

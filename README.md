@@ -11,8 +11,10 @@ Questo progetto didattico nasce con l'obiettivo di esplorare il funzionamento di
 * [compiler mode](#compiler)
    * [optimize](#optimize)
 * [benchmark](#benchmark)
-* [info](#info)
-* [help](#help)
+* [extra](#extra)
+   * [info](#info)
+   * [help](#help)
+   * [about](#about)
 
 ---
 
@@ -113,16 +115,16 @@ current intruction: 90   '!'    cell n. 15025   value:   0
 In caso di errore o malfunzionamento, è possibile abortire il programma premendo esc.
 
 ---
-## logging:
+## Logging:
 ### Modalità di utilizzo:
 ```
 ./yabi hello_world -> logfile -d
 ```
 
-fornendo un output al programma in modalità debug, esso creerà un log file nel quale salverà tutte queste informazioni per ogni singola istruzione.
+Fornendo un output al programma in modalità debug, esso creerà un log file nel quale salverà tutte queste informazioni per ogni singola istruzione.
 
 
-L'eseguibile si troverà nella cartella `/log`
+Il file si troverà nella cartella `/log`
 
 ---
 
@@ -136,8 +138,10 @@ Aggiungere il flag `-c` oppure `--compile`
 ./yabi hello_world -> output_name --compile
 ```
 In modalità compilatore, le istruzioni in brainf**k vengono tradotte in codice C, il quale viene salvato all'interno di un file.
-
+Qualora non venga assegnato un nome al file di output, questo verrà scelto automaticamente dal programma.
 Il file si troverà nella cartella `/output`
+
+---
 
 ## Optimize:
 ### Modalità di utilizzo:
@@ -151,7 +155,7 @@ Aggiungere il flag `-o` oppure `--optimize`
 In modalità ottimizzazione, il programma crea una rappresentazione intermedia del codice in Brainf**k, la quale viene ottimizzata per andare a creare del codice più performante
 
 ### esempio:
-codice non ottimizzato
+codice non ottimizzato:
 ```
 int main()
 {
@@ -177,7 +181,7 @@ int main()
       (*ptr)++;
       ...
 ```
-codice ottimizzato
+codice ottimizzato:
 ```
 #include <stdio.h>
 
@@ -197,4 +201,99 @@ int main()
       *(ptr +=(-4)) += (-1);
    }
 }
+```
+---
+
+## Benchmark:
+### Modalità di utilizzo:
+Aggiungere il flag `-b` oppure `--benchmark`
+
+interpreter mode:
+```
+./yabi mandelbrot -b
+```
+compiler mode
+```
+./yabi --compile --benchmark mandelbrot -> output 
+```
+```
+./yabi mandelbrot -> output -c -b -o
+```
+
+La modalità benchmark fornisce informazioni riguardo i tempi di esecuzione del programma. In modalità compiler, oltre a dichiarare il tempo impiegato dalla compilazione del programma, aggiunge del codice nel file C in output affinché anch'esso fornisca informazioni di benchmark.
+
+---
+
+## Extra
+Una serie di funzionalità aggiuntive e molto probabilmente superflue:
+
+---
+
+### Info:
+#### Modalità di utilizzo:
+```
+./yabi triangle -info
+
+This program prints out the Sierpinski triangle
+```
+Questa flag fa sì che la descrizione del programma in Brainf**k all'inizio del file sia stampata a schermo. Qualora non sia presente una descrizione, stamperà un messaggio di errore.
+```
+./yabi hello_world_2 -info
+
+No description found.
+```
+
+### Help:
+#### Modalità di utilizzo:
+```
+./yabi -help
+```
+Questa flag stampa a video un breve riassunto di tutto ciò che c'è da sapere per riuscire ad usare questo programma.
+
+### About:
+#### Modalità di utilizzo:
+```
+./yabi -about
+```
+Questa flag stampa a video una concisa presentazione di questo progetto.
+
+---
+# Risultati dei benchmark:
+## interpreter mode:
+```
+./yabi mandelbrot -b
+```
+```
+[INFO] program execution took 34.281000 seconds
+```
+--- 
+## unoptimized compiler mode:
+```
+./yabi mandelbrot -c -b
+```
+```
+[INFO] compilation took 0.017000 seconds
+```
+```
+gcc mandelbrot.c
+./a
+```
+```
+[INFO: The program took 18.979000 seconds]
+```
+---
+
+## optimized compiler mode:
+```
+./yabi mandelbrot -c -b -o
+```
+```
+[INFO] compilation took 0.011000 seconds
+```
+```
+gcc mandelbrot.c
+./a
+```
+```
+[INFO: The program took 5.383000 seconds]
 ```

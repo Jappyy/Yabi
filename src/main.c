@@ -7,7 +7,8 @@ int main(int argc, char** argv)
       init();
    #endif
 
-   benchmark();
+   clock_t time = clock();
+
    command_line_args* args = check_args(argc, argv);
    check_flags(args);
 
@@ -42,7 +43,11 @@ int main(int argc, char** argv)
    
 
    if (args->flags.benchmark)
-      benchmark();
+      if (args->flags.compiler)
+         print(stdout, "[INFO] compilation took %lf seconds", (double) (clock() - time)/CLOCKS_PER_SEC);
+      
+      else
+         print(stdout, "[INFO] program execution took %lf seconds", (double) (clock() - time)/CLOCKS_PER_SEC);
 
 /*
    if (args->flags.compiler)    printf("compiler mode\n"   );
